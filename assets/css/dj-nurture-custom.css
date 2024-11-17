@@ -1,0 +1,216 @@
+        /* Base structure */
+        body {
+          text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+          box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+          position: relative; /* Add this */
+          overflow: hidden; /* Add this */
+      }
+
+      .loader-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, #183134, #0a1214);
+        z-index: 9999;
+        opacity: 1;
+        transition: opacity 1s ease-in-out;
+        pointer-events: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .loader-overlay.fade-out {
+        opacity: 0;
+    }
+
+    .loader-logo {
+        width: 300px; /* Adjust size as needed */
+        height: auto;
+        opacity: 1;
+        transition: opacity 1s ease-in-out;
+    }
+
+    .loader-logo.spin {
+        animation: spinOut 1s ease-in-out forwards;
+    }
+
+    @keyframes spinOut {
+        0% {
+            transform: rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: rotate(360deg);
+            opacity: 0;
+        }
+    }
+
+    .fade-content {
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    .fade-content.visible {
+        opacity: 1;
+    }
+
+      .page-video__video-container {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -3;
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    .video-placeholder {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ensures image covers container */
+        top: 0;
+        left: 0;
+    }
+
+    .video-loop-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+    }
+
+    .video-loop.inside-video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100vw;
+        height: 100vh;
+        min-width: 100%;
+        min-height: 100%;
+        object-fit: cover;
+        /* Scale up to cover the container, cropping as needed */
+        transform: translate(-50%, -50%) scale(1.5);
+    }
+
+    @media (max-aspect-ratio: 16/9) {
+        /* For screens narrower than 16:9 */
+        .video-loop.inside-video {
+            width: 177.77777778vh; /* 16/9 = 1.777... */
+            height: 100vh;
+        }
+    }
+
+    @media (min-aspect-ratio: 16/9) {
+        /* For screens wider than 16:9 */
+        .video-loop.inside-video {
+            width: 100vw;
+            height: 56.25vw; /* 9/16 = 0.5625 */
+        }
+    }
+
+      /* Content container */
+      .cover-container {
+          position: relative;
+          z-index: 1;
+          max-width: 42em;
+      }
+
+      /* Optional overlay */
+      .video-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.4);
+          z-index: -2;
+      }
+
+
+      .gradient-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+    }
+
+    .gradient-overlay::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 200%; /* Double height for smooth transform */
+        background: linear-gradient(
+            to top,
+            rgba(91, 115, 85, 0.8) 0%,
+            rgba(91, 115, 85, 0.5) 25%,
+            rgba(91, 115, 85, 0) 37.5%,
+            transparent 50% /* Half of the double height */
+        );
+        transform-origin: bottom;
+        will-change: transform;
+        animation: smoothBreathe 8s ease-in-out infinite;
+    }
+
+    @keyframes smoothBreathe {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(20%);
+        }
+    }
+
+      /* Optional color tint layer for better text readability */
+      .color-tint {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: -1;
+          background: rgba(0, 0, 0, 0.2); /* Subtle darkening */
+          pointer-events: none;
+      }
+
+
+      /* Keep your existing nav styles */
+      .nav-masthead .nav-link {
+          color: rgba(255, 255, 255, .5);
+          border-bottom: .25rem solid transparent;
+      }
+
+      .nav-masthead .nav-link:hover,
+      .nav-masthead .nav-link:focus {
+          border-bottom-color: rgba(255, 255, 255, .25);
+      }
+
+      .nav-masthead .nav-link + .nav-link {
+          margin-left: 1rem;
+      }
+
+      .nav-masthead .active {
+          color: #fff;
+          border-bottom-color: #fff;
+      }
+
+      /* Ensure content remains on top */
+      main {
+          position: relative;
+          z-index: 1;
+      }
+
